@@ -121,6 +121,17 @@ ws.addEventListener('error', onDisconnect);
  * Calls `get_battle_results` and `subscribe` methods through JSON RPC to receive all previous battle results
  * and to subscribe to all new ones.
  */
+
+ ws.onclose = function(event) {
+    if (event.wasClean) {
+      alert('Соединение закрыто чисто');
+    } else {
+      alert('Обрыв соединения'); // например, "убит" процесс сервера
+    }
+    alert('Код: ' + event.code + ' причина: ' + event.reason);
+  };
+  
+
 function onOpen() {
     ws.send(JSON.stringify([
         {
